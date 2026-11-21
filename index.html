@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- website made by @yeenrux and @limnixz -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>falrux</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+  <svg class="filters" aria-hidden="true">
+    <filter id="crt-color" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
+      <feImage href="assets/images/cwm.png" result="warp-map" preserveAspectRatio="none" />
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="warp-map"
+        scale="30"
+        xChannelSelector="R"
+        yChannelSelector="G"
+        result="warped"
+      />
+      <feColorMatrix
+        in="warped"
+        type="matrix"
+        values="1 0 0 0 .002  0 1 0 0 .008  0 0 1.025 0 .03  0 0 0 1 0"
+      />
+    </filter>
+  </svg>
+
+  <div id="screen">
+    <canvas id="noise" aria-hidden="true"></canvas>
+
+    <main class="content">
+      <button id="enter" type="button" hidden>enter</button>
+      <canvas id="crt" role="img" aria-label="Glitchy pixelated terminal text"></canvas>
+
+      <section id="home" hidden>
+        <div id="card">
+          <svg class="card-warning" viewBox="0 0 16 16" aria-hidden="true">
+            <path fill-rule="evenodd" d="M8 1 16 15H0ZM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+          </svg>
+          <span>falrux</span>
+        </div>
+      </section>
+      <noscript><p>falrux</p></noscript>
+    </main>
+  </div>
+
+  <script src="assets/js/sound.js"></script>
+  <script src="assets/js/noise.js"></script>
+  <script src="assets/js/crt.js"></script>
+</body>
+</html>

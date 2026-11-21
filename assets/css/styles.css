@@ -1,0 +1,172 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: #020712;
+}
+
+body {
+  overflow: hidden;
+  color: #d6d4d6;
+  font: 13px monospace;
+}
+
+.filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+#screen {
+  position: fixed;
+  inset: 0;
+  isolation: isolate;
+  overflow: hidden;
+  background: #020712;
+  box-shadow: inset 0 0 65px #000;
+  filter: url(#crt-color);
+  transform: scale(1.02) translateZ(0);
+}
+
+.plain-crt #screen {
+  filter: none;
+}
+
+#noise {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .085;
+  image-rendering: pixelated;
+  transition: opacity .8s ease;
+}
+
+.content {
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 24px 5vw;
+}
+
+#crt {
+  position: absolute;
+  top: 3vh;
+  left: 3vw;
+  transform: scale(1.5);
+  transform-origin: top left;
+}
+
+a {
+  color: inherit;
+}
+
+#home {
+  margin: auto;
+}
+
+#card {
+  width: min(540px, 86vw);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: #eee;
+  font: 17px monospace;
+  text-align: left;
+  padding: 26px 32px;
+  background: #050b16;
+}
+
+.card-warning {
+  width: 42px;
+  height: 38px;
+  fill: #f1d427;
+}
+
+.files {
+  width: 100%;
+}
+
+.files h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.back {
+  position: absolute;
+  top: 20px;
+  left: max(16px, 5vw);
+  padding: 5px 8px;
+  background: #050b16;
+  border: 1px solid #4a4f58;
+  text-decoration: none;
+}
+
+.back:hover, .back:focus-visible {
+  border-color: #d6d4d6;
+}
+
+.tv #noise {
+  opacity: 1;
+}
+
+.template #noise {
+  opacity: .14;
+}
+
+#screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  background: repeating-linear-gradient(transparent 0 3px, #02071255 3px 5px);
+  mix-blend-mode: multiply;
+  backdrop-filter: saturate(2);
+  -webkit-backdrop-filter: saturate(2);
+}
+
+#screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .8s ease;
+  background: radial-gradient(ellipse at center, transparent 36%, #000 112%);
+}
+
+.tv #screen::after, .template #screen::after {
+  opacity: 1;
+}
+
+#enter {
+  margin: auto;
+  color: inherit;
+  background: #050b16;
+  border: 1px solid #555;
+  padding: 10px 24px;
+  font: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .content {
+    padding: 20px 12px;
+    justify-content: flex-start;
+  }
+
+  #card {
+    padding: 24px 26px;
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- website made by @yeenrux and @limnixz -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>template</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body class="template">
+  <svg class="filters" aria-hidden="true">
+    <filter id="crt-color" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
+      <feImage href="assets/images/cwm.png" result="warp-map" preserveAspectRatio="none" />
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="warp-map"
+        scale="30"
+        xChannelSelector="R"
+        yChannelSelector="G"
+        result="warped"
+      />
+      <feColorMatrix
+        in="warped"
+        type="matrix"
+        values="1 0 0 0 .002  0 1 0 0 .008  0 0 1.025 0 .03  0 0 0 1 0"
+      />
+    </filter>
+  </svg>
+
+  <div id="screen">
+    <canvas id="noise" aria-hidden="true"></canvas>
+
+    <main class="content">
+      <section class="files">
+        <h1>template</h1>
+        <a class="back" href="index.html#skip">back</a>
+      </section>
+    </main>
+  </div>
+
+  <script src="assets/js/sound.js"></script>
+  <script src="assets/js/noise.js"></script>
+</body>
+</html>

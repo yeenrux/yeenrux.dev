@@ -34,6 +34,28 @@ body {
   transform: scale(1.02) translateZ(0);
 }
 
+#frame {
+  --edge: 2% 1.5%;
+  position: fixed;
+  inset: 0;
+  clip-path: inset(var(--edge) round 3.5vmin);
+  transform: scale(1.02) translateZ(0);
+}
+
+#frame #screen {
+  position: absolute;
+  clip-path: none;
+  transform: none;
+}
+
+#bounce {
+  position: absolute;
+  inset: var(--edge);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
 .plain-crt #screen {
   filter: none;
 }
@@ -88,7 +110,7 @@ a {
   pointer-events: none;
 }
 
-#home:not([hidden]) + #channel {
+#frame:has(#home:not([hidden])) #channel {
   display: block;
 }
 

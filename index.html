@@ -29,13 +29,19 @@
     </filter>
   </svg>
 
-  <div id="screen">
-    <canvas id="noise" aria-hidden="true"></canvas>
+  <div id="frame">
+    <div id="screen">
+      <canvas id="noise" aria-hidden="true"></canvas>
 
-    <main class="content">
-      <button id="enter" type="button" hidden>enter</button>
-      <canvas id="crt" role="img" aria-label="Glitchy pixelated terminal text"></canvas>
+      <main class="content">
+        <button id="enter" type="button" hidden>enter</button>
+        <canvas id="crt" role="img" aria-label="Glitchy pixelated terminal text"></canvas>
 
+        <span id="channel">CH 03</span>
+        <noscript><p>falrux</p></noscript>
+      </main>
+    </div>
+    <div id="bounce">
       <section id="home" hidden>
         <div id="card">
           <svg class="card-warning" viewBox="0 0 16 16" aria-hidden="true">
@@ -44,9 +50,7 @@
           <span>falrux</span>
         </div>
       </section>
-      <span id="channel">CH 03</span>
-      <noscript><p>falrux</p></noscript>
-    </main>
+    </div>
   </div>
 
   <script src="assets/js/sound.js"></script>

@@ -133,13 +133,14 @@
 
   function move() {
     const still = matchMedia('(prefers-reduced-motion: reduce)');
-    const screen = document.getElementById('screen');
+    const bounds = document.getElementById('bounce');
     let x = 0;
     let y = 0;
     const angle = (30 + Math.random() * 30) * Math.PI / 180;
     let dx = Math.cos(angle) * (Math.random() < .5 ? -65 : 65);
     let dy = Math.sin(angle) * (Math.random() < .5 ? -65 : 65);
     let last = 0;
+    let bounce = 0;
 
     function frame(time) {
       const dt = Math.min((time - (last || time)) / 1000, .05);
@@ -150,10 +151,13 @@
         home.style.transform = '';
         return;
       }
+      if (time < bounce) return;
 
-      const rect = screen.getBoundingClientRect();
-      const w = Math.max(0, (innerWidth * screen.clientWidth / rect.width - home.offsetWidth) / 2);
-      const h = Math.max(0, (innerHeight * screen.clientHeight / rect.height - home.offsetHeight) / 2);
+      const box = bounds.getBoundingClientRect();
+      const card = home.getBoundingClientRect();
+      const scale = box.width / parseFloat(getComputedStyle(bounds).width);
+      const w = Math.max(0, (box.width - card.width) / (2 * scale));
+      const h = Math.max(0, (box.height - card.height) / (2 * scale));
       x += dx * dt;
       y += dy * dt;
 
@@ -163,6 +167,7 @@
       y = Math.max(-h, Math.min(h, y));
       if (w && side) dx = Math.abs(dx) * side;
       if (h && edge) dy = Math.abs(dy) * edge;
+      if ((w && side) || (h && edge)) bounce = time + 100;
 
       home.style.transform = `translate(${x}px, ${y}px)`;
     }

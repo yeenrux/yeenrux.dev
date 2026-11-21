@@ -13,8 +13,8 @@
   let img;
 
   function resize() {
-    box.width = Math.ceil(innerWidth / 3);
-    box.height = Math.ceil(innerHeight / 3);
+    box.width = Math.ceil(box.clientWidth / 3);
+    box.height = Math.ceil(box.clientHeight / 3);
     img = pen.createImageData(box.width, box.height);
   }
 

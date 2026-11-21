@@ -11,6 +11,7 @@
     box.hidden = true;
 
     home.hidden = false;
+    move();
     return;
   }
 
@@ -116,13 +117,57 @@
     home.inert = true;
 
     if (!still) {
-      await home.animate([{ opacity: 0 }, { opacity: 1 }], {
+      const channel = document.getElementById('channel');
+      const fade = [{ opacity: 0 }, { opacity: 1 }];
+      const opts = {
         duration: 400,
         easing: 'ease-in'
-      }).finished;
+      };
+      channel.animate(fade, opts);
+      await home.animate(fade, opts).finished;
     }
 
     home.inert = false;
+    move();
+  }
+
+  function move() {
+    const still = matchMedia('(prefers-reduced-motion: reduce)');
+    const screen = document.getElementById('screen');
+    let x = 0;
+    let y = 0;
+    const angle = (30 + Math.random() * 30) * Math.PI / 180;
+    let dx = Math.cos(angle) * (Math.random() < .5 ? -65 : 65);
+    let dy = Math.sin(angle) * (Math.random() < .5 ? -65 : 65);
+    let last = 0;
+
+    function frame(time) {
+      const dt = Math.min((time - (last || time)) / 1000, .05);
+      last = time;
+      requestAnimationFrame(frame);
+
+      if (still.matches) {
+        home.style.transform = '';
+        return;
+      }
+
+      const rect = screen.getBoundingClientRect();
+      const w = Math.max(0, (innerWidth * screen.clientWidth / rect.width - home.offsetWidth) / 2);
+      const h = Math.max(0, (innerHeight * screen.clientHeight / rect.height - home.offsetHeight) / 2);
+      x += dx * dt;
+      y += dy * dt;
+
+      const side = x < -w ? 1 : x > w ? -1 : 0;
+      const edge = y < -h ? 1 : y > h ? -1 : 0;
+      x = Math.max(-w, Math.min(w, x));
+      y = Math.max(-h, Math.min(h, y));
+      if (w && side) dx = Math.abs(dx) * side;
+      if (h && edge) dy = Math.abs(dy) * edge;
+
+      home.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    requestAnimationFrame(frame);
   }
 
   enter.addEventListener('click', open, { once: true });

@@ -11,12 +11,12 @@
 
 <body class="template">
   <svg class="filters" aria-hidden="true">
-    <filter id="crt-color" x="-4%" y="-4%" width="108%" height="108%" color-interpolation-filters="sRGB">
+    <filter id="crt-color" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
       <feImage href="assets/images/cwm.png" result="warp-map" preserveAspectRatio="none" />
       <feDisplacementMap
         in="SourceGraphic"
         in2="warp-map"
-        scale="30"
+        scale="145"
         xChannelSelector="R"
         yChannelSelector="G"
         result="warped"
@@ -24,7 +24,7 @@
       <feColorMatrix
         in="warped"
         type="matrix"
-        values="1 0 0 0 .002  0 1 0 0 .008  0 0 1.025 0 .03  0 0 0 1 0"
+        values="1 0 0 0 .002  0 1 0 0 .008  0 0 1.045 0 .05  0 0 0 1 0"
       />
     </filter>
   </svg>
